@@ -12,5 +12,15 @@ public class StringCalculatorTest {
     @Test
     public void EmptyString() {
         assertEquals(0, StringCalculator.add(""));
+
+    }
+    @Test
+    public void OneString() {
+        assertEquals(1, StringCalculator.add("1"));
+    }
+
+    @Test
+    public void TwoString(){
+        assertEquals(3, StringCalculator.add("1,2"));
     }
 }
