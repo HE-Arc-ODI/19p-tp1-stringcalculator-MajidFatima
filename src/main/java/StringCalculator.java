@@ -1,3 +1,4 @@
+
 public class StringCalculator {
 
     public static int add(String s) {
@@ -5,11 +6,15 @@ public class StringCalculator {
             return 0;
         } else if(s.contains(",")) {
             String[] tokens = s.split(",");
-            return parseToInt(tokens[0]) + parseToInt(tokens[1]);
+            return sum(tokens[0], tokens[1]);
         }else
          {
-             return parseToInt(s); 
+             return parseToInt(s);
          }
+    }
+
+    public static int sum(String n1, String n2){
+        return parseToInt(n1) + parseToInt(n2);
     }
 
     private static int parseToInt(String s) {
