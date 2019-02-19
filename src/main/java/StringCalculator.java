@@ -35,8 +35,11 @@ public class StringCalculator {
         }
         int total = 0;
         for (String value : tokens){
-            total += Integer.valueOf(value);
+            if(parseToInt(value) < 1000 ) {
+                total += Integer.valueOf(value);
+            }
         }
+
         return total;
     }
 
