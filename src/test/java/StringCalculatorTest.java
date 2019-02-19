@@ -2,6 +2,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class StringCalculatorTest {
 
@@ -35,5 +36,15 @@ public class StringCalculatorTest {
     @Test
     public void OtherDelimiters(){
         assertEquals(3, StringCalculator.add("//;\n1;2"));
+    }
+
+    @Test
+    public void ExceptionOnNegativesNumbers(){
+        try {
+            StringCalculator.add("-1,-2,3");
+            fail("Exception");
+        } catch (IllegalArgumentException e){
+            assertEquals("Negative number is not allowed : -1, -2", e.getMessage());
+        }
     }
 }
