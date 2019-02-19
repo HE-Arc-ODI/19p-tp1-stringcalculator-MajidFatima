@@ -46,4 +46,9 @@ public class StringCalculatorTest {
             assertEquals("Negative number is not allowed : -1,-2", e.getMessage());
         }
     }
+
+    @Test
+    public void biggerThan1000(){
+        assertEquals(2, StringCalculator.add("1000,2"));
+    }
 }
