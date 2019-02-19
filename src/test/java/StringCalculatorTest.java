@@ -23,4 +23,8 @@ public class StringCalculatorTest {
     public void TwoString(){
         assertEquals(3, StringCalculator.add("1,2"));
     }
+    @Test
+    public void SumString(){
+        assertEquals(6, StringCalculator.add("1,2,3"));
+    }
 }
