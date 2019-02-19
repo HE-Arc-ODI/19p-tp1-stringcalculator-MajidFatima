@@ -11,7 +11,6 @@ public class StringCalculator {
            for (String value : tokens){
                total += Integer.valueOf(value);
            }
-            //return sum(tokens[0], tokens[1]);
             return total;
         }else
          {
