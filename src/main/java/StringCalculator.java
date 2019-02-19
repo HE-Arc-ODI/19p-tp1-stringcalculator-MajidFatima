@@ -6,17 +6,21 @@ public class StringCalculator {
         if (s.isEmpty()) {
             return 0;
         } else  {
-            String delimiter = ",";
-            String newLine = "|\n";
-            if(s.matches("//(.*)\n(.*)")){
-                delimiter = Character.toString(s.charAt(2));
-                s = s.substring(4);
-            }
-            List<String> numbers = Arrays.asList(s.split(delimiter + newLine));
+            List<String> numbers = delimiters(s);
             return (int) sum(numbers);
         }
     }
-    
+
+    private static List<String> delimiters(String s) {
+        String newLine = "|\n";
+        String delimiter = ",";
+        if(s.matches("//(.*)\n(.*)")){
+            delimiter = Character.toString(s.charAt(2));
+            s = s.substring(4);
+        }
+        return Arrays.asList(s.split(delimiter + newLine));
+    }
+
     private static int sum(List<String> tokens) {
         int total = 0;
         for (String value : tokens){
