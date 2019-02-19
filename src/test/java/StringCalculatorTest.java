@@ -41,10 +41,9 @@ public class StringCalculatorTest {
     @Test
     public void ExceptionOnNegativesNumbers(){
         try {
-            StringCalculator.add("-1,-2,3");
-            fail("Exception");
+            StringCalculator.add("-1,3,-2");
         } catch (IllegalArgumentException e){
-            assertEquals("Negative number is not allowed : -1, -2", e.getMessage());
+            assertEquals("Negative number is not allowed : -1,-2", e.getMessage());
         }
     }
 }
