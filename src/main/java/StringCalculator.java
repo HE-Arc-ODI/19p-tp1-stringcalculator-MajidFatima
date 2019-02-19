@@ -1,19 +1,23 @@
-import static java.util.Arrays.asList;
+import java.util.Arrays;
+import java.util.List;
 
 public class StringCalculator {
-    private static int startIndex;
     public static int add(String s) {
         if (s.isEmpty()) {
             return 0;
-        } else if(s.contains(",")) {
-            return sum(s.split(",|\n"));
-        }else
-         {
-             return parseToInt(s);
-         }
+        } else  {
+            String delimiter = ",";
+            String newLine = "|\n";
+            if(s.matches("//(.*)\n(.*)")){
+                delimiter = Character.toString(s.charAt(2));
+                s = s.substring(4);
+            }
+            List<String> numbers = Arrays.asList(s.split(delimiter + newLine));
+            return (int) sum(numbers);
+        }
     }
-
-    private static int sum(String[] tokens) {
+    
+    private static int sum(List<String> tokens) {
         int total = 0;
         for (String value : tokens){
             total += Integer.valueOf(value);
