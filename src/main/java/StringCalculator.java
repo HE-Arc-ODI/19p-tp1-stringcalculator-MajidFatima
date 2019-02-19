@@ -8,7 +8,6 @@ public class StringCalculator {
             return 0;
         } else  {
             List<String> numbers = delimiters(s);
-
             return (int) sum(numbers);
         }
     }
@@ -25,21 +24,35 @@ public class StringCalculator {
 
     private static int sum(List<String> tokens) {
         String negatives = "";
+        negatives = getString(tokens, negatives);
+        throwIllegalArgumentOnNegativesNumbers(negatives);
+        int total = 0;
+        total = getTotal(tokens, total);
+
+        return total;
+    }
+
+    private static void throwIllegalArgumentOnNegativesNumbers(String negatives) {
+        if(negatives.length() > 0 ){
+            throw new IllegalArgumentException("Negative number is not allowed : "+ negatives.substring(1));
+        }
+    }
+
+    private static String getString(List<String> tokens, String negatives) {
         for (String value : tokens){
             if(parseToInt(value) <  0 ){
                 negatives+= ","+ value;
             }
         }
-        if(negatives.length() > 0 ){
-            throw new IllegalArgumentException("Negative number is not allowed : "+ negatives.substring(1));
-        }
-        int total = 0;
+        return negatives;
+    }
+
+    private static int getTotal(List<String> tokens, int total) {
         for (String value : tokens){
             if(parseToInt(value) < 1000 ) {
                 total += Integer.valueOf(value);
             }
         }
-
         return total;
     }
 
