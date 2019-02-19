@@ -6,7 +6,7 @@ public class StringCalculator {
         if (s.isEmpty()) {
             return 0;
         } else if(s.contains(",")) {
-            return sum(s.split(","));
+            return sum(s.split(",|\n"));
         }else
          {
              return parseToInt(s);
