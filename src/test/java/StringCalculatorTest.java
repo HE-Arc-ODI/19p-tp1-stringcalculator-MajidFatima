@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 public class StringCalculatorTest {
-
     @Before
     public void setup(){
     }
@@ -37,7 +36,6 @@ public class StringCalculatorTest {
     public void OtherDelimiters(){
         assertEquals(3, StringCalculator.add("//;\n1;2"));
     }
-
     @Test
     public void ExceptionOnNegativesNumbers(){
         try {
@@ -46,9 +44,12 @@ public class StringCalculatorTest {
             assertEquals("Negative number is not allowed : -1,-2", e.getMessage());
         }
     }
-
     @Test
-    public void biggerThan1000(){
+    public void BiggerThan1000(){
         assertEquals(2, StringCalculator.add("1000,2"));
+    }
+    @Test
+    public void AllKindOfDelimiters(){
+        assertEquals(6, StringCalculator.add("//[***]\n1***2***3"));
     }
 }
