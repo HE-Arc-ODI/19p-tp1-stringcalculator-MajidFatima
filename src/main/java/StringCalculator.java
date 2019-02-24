@@ -1,16 +1,41 @@
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 
 public class StringCalculator {
+
+    private String delimiter;
+    private String numbers;
+
+    private StringCalculator(String delimiter, String numbers) {
+        this.delimiter = delimiter;
+        this.numbers = numbers;
+    }
     public static int add(String s) {
         if (s.isEmpty()) {
             return 0;
         } else  {
-            List<String> numbers = delimiters(s);
-            return (int) sum(numbers);
+            if (s.startsWith("//")) {
+                String[] head = s.split("\n", 2);
+                String delimiter = head[0].substring(2);
+                if (delimiter.startsWith("[")) {
+                    delimiter = delimiter.substring(1, delimiter.length() - 1);
+                }
+                String d =  Stream.of(delimiter.split("]\\["))
+                        .map(Pattern::quote)
+                        .collect(Collectors.joining("|"));
+                return new StringCalculator(d, head[1]).sum();
+            } else {
+                List<String> numbers = delimiters(s);
+                return (int) sum(numbers);
+            }
         }
-    }
+
+        }
 
     private static List<String> delimiters(String s) {
         String newLine = "|\n";
@@ -60,4 +85,16 @@ public class StringCalculator {
     private static int parseToInt(String s) {
         return Integer.parseInt(s);
     }
+    private IntStream getNumbers() {
+
+            return Stream.of(numbers.split(delimiter))
+                    .mapToInt(Integer::parseInt)
+                    .map(n -> n % 1000);
+
+    }
+
+    private int sum() {
+        return getNumbers().sum();
+    }
+
 }
