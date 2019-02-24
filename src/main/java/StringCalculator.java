@@ -22,13 +22,9 @@ public class StringCalculator {
             if (s.startsWith("//")) {
                 String[] head = s.split("\n", 2);
                 String delimiter = head[0].substring(2);
-                if (delimiter.startsWith("[")) {
-                    delimiter = delimiter.substring(1, delimiter.length() - 1);
-                }
-                String d =  Stream.of(delimiter.split("]\\["))
-                        .map(Pattern::quote)
-                        .collect(Collectors.joining("|"));
-                return new StringCalculator(d, head[1]).sum();
+                delimiter = getFirstDelimiter(delimiter);
+                String delimitation = getCollect(delimiter);
+                return new StringCalculator(delimitation, head[1]).sum();
             } else {
                 List<String> numbers = delimiters(s);
                 return (int) sum(numbers);
@@ -36,6 +32,19 @@ public class StringCalculator {
         }
 
         }
+
+    private static String getCollect(String delimiter) {
+        return Stream.of(delimiter.split("]\\["))
+                .map(Pattern::quote)
+                .collect(Collectors.joining("|"));
+    }
+
+    private static String getFirstDelimiter(String delimiter) {
+        if (delimiter.startsWith("[")) {
+            delimiter = delimiter.substring(1, delimiter.length() - 1);
+        }
+        return delimiter;
+    }
 
     private static List<String> delimiters(String s) {
         String newLine = "|\n";
